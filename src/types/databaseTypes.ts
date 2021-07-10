@@ -1,5 +1,7 @@
 import { DataTypeAbstract, DefineAttributeColumnOptions } from 'sequelize';
 import * as Sequelize from 'sequelize';
+import { UserAttributes, UserInstance } from '../database/models/user';
+import { VerificationAttributes, VerificationInstance } from '../database/models/verification';
 
 type SequelizeAttribute = string | DataTypeAbstract | DefineAttributeColumnOptions
 
@@ -9,5 +11,7 @@ export type SequelizeAttributes<T extends { [key: string]: any }> = {
 
 export interface DbInterface {
   sequelize: Sequelize.Sequelize,
-  Sequelize: Sequelize.SequelizeStatic
+  Sequelize: Sequelize.SequelizeStatic,
+  User: Sequelize.Model<UserInstance, UserAttributes>,
+  Verification: Sequelize.Model<VerificationInstance, VerificationAttributes>
 }
