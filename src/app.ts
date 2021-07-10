@@ -1,4 +1,3 @@
-import chalk from 'chalk'
 import express, { Request, Response } from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
@@ -25,8 +24,8 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
 // routes
+app.get('/', (req, res) => res.status(301).redirect('/api/v1'));
 app.use(router)
-
 app.all('*', (req: Request, res: Response) => {
   throw new ApplicationError({
     status: 404,

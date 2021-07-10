@@ -1,7 +1,5 @@
 import argon2 from 'argon2';
-import cryptoRandomString from 'crypto-random-string';
-import { token } from 'morgan';
-import { verifyUser } from '../controllers/verification.controller';
+import crypto from "crypto";
 import { UserAttributes } from '../database/models/user';
 import { ApplicationError } from '../lib';
 import { User } from '../repository';
@@ -48,7 +46,7 @@ const registerUser = async (body: UserAttributes, url:string): Promise<Boolean> 
   }
 
   const token = getAuthToken({ email: createdUser.email, userId: createdUser.id });  
-  const confirmationCode = cryptoRandomString(5);
+  const confirmationCode = crypto.randomBytes(10).toString('hex');
   
   const saveDetailsToVerification = await verificationService.createUserVerification({token: confirmationCode, email:createdUser.email});
   if(!saveDetailsToVerification){
