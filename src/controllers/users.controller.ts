@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { successResponse } from '../lib';
-import { authService } from '../services';
+import { authService, userService } from '../services';
 import { filterOutPassword } from '../utils/filterOutPassword';
 
 export const registerUser = async (req: Request, res: Response, next: NextFunction) => {
@@ -26,6 +26,20 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
       res,
       message:'You have successfully logged in',
       data,
+      statusCode: 200,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const updateUserStatus = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const result = await userService.updateUserStatus(req.body);
+    return successResponse({
+      res,
+      message:'User Account status updated successfully',
+      data: {...filterOutPassword(result)} as any,
       statusCode: 200,
     });
   } catch (error) {

@@ -16,7 +16,6 @@ type successResponseInputType = {
 };
 
 type errorResponseInputType = {
-  req: Request;
   res: Response;
   data?: any;
   status?: string;
@@ -33,7 +32,7 @@ export const successResponse = ({ res, data, message, status, statusCode }: succ
   return res.status(statusCode || 200).send(responseBody);
 };
 
-export const errorResponse = ({ req, res, status, data, message, statusCode }: errorResponseInputType) => {
+export const errorResponse = ({ res, status, data, message, statusCode }: errorResponseInputType | any) => {
   const responseBody = {
     status: status || 'failed',
     message: message || applicationMessages.ERROR_RESPONSE_MESSAGE,
