@@ -57,6 +57,7 @@ export const UserModel = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.D
 
   User.associate = models => {
     User.hasMany(models.Verification, { foreignKey: 'email', as: 'useremail' })
+    User.hasMany(models.Location, { foreignKey: 'id', as: 'user' })
   } 
  
 

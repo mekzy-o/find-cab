@@ -7,12 +7,8 @@ import { getAuthToken } from '../utils/auth';
 import { filterOutPassword } from '../utils/filterOutPassword';
 import { sendVerificationMail} from './email.service';
 import verificationService from './verification.service';
-
-
-// const validatePassword = async (email: string, password: string) => {
-//   const foundUser = await userDAO.getUserByEmailForLogin(email);
-//   return foundUser ? argon2.verify(foundUser.password, password) : false;
-// };
+import { userValidator } from '../validators';
+import { userService } from '.';
 
 export interface UserReturnedProp {
   token: string,
@@ -30,8 +26,8 @@ export interface UserReturnedProp {
 }
 
 const registerUser = async (body: UserAttributes, url:string): Promise<Boolean> => {
+  await userValidator.validate(body, { strict: true });
   const { email, password } = body;
-
   const foundUser = await User.getUserByEmail(email);
 
   if (foundUser) {
@@ -67,6 +63,10 @@ export const loginUser = async (body: {email:string, password:string}) => {
     throw new ApplicationError({ message: 'User with this email does not exist' });
   }
 
+  if(foundUser.status === 'inactive'){
+    throw new ApplicationError({ message: 'Account is not verified, Please be sure to check your email' });
+  }
+
 // @ts-ignore: Object is possibly 'null'
   const verifyPassword = await argon2.verify(foundUser.password, password);
   if(!verifyPassword){
@@ -78,6 +78,7 @@ export const loginUser = async (body: {email:string, password:string}) => {
 // @ts-ignore: Object is possibly 'null'.
   return {token, ...filterOutPassword(foundUser)}
 }
+
 export default {
   registerUser,
   loginUser
