@@ -1,8 +1,10 @@
 import jwt from 'jsonwebtoken';
+import crypto from "crypto";
 import { Verification, User } from '../repository';
 import { ApplicationError, errorResponse } from '../lib';
 import { VerificationAttributes } from '../database/models/verification';
 import  usersService  from './users.service';
+import { getAuthToken } from '../utils/auth';
 
 /**
  * @export
@@ -37,7 +39,26 @@ const verifyAndUpdateUserStatus = async(token: string, confirmationCode: string,
  
 } 
 
+export const generateVerificationLink = async (body:{email: string}, url: string) => {
+  const { email } = body;
+  const foundUser = await User.getUserByEmail(email);
+  
+  if(!foundUser){
+    throw new ApplicationError({ message: 'User with this email does not exist' });
+  }
+
+  const verification = await Verification.findByEmail(foundUser.email);
+  const token = getAuthToken({ email: foundUser.email, userId: foundUser.id }); 
+  //@ts-ignore
+  const confirmationCode = verification.token
+
+  const link = `${url}/verification?token=${token}&email=${email}&confirmationCode=${confirmationCode}`
+  return link;
+}
+
+
 export default {
     createUserVerification,
-    verifyAndUpdateUserStatus
+    verifyAndUpdateUserStatus,
+    generateVerificationLink,
 }

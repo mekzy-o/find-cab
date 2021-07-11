@@ -79,7 +79,8 @@ export const loginUser = async (body: {email:string, password:string}) => {
   return {token, ...filterOutPassword(foundUser)}
 }
 
+
 export default {
   registerUser,
-  loginUser
+  loginUser,
 };
