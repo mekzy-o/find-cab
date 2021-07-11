@@ -1,0 +1,65 @@
+{
+    "post": {
+      "tags": [
+        "Manual Generation of Verification"
+      ],
+      "summary": "This is to manually generate verification link due to some inconsistencies of nodemailer in production",
+      "description": "generate verification link for User",
+      "parameters": [
+        {
+          "name": "Generate verification Link",
+          "in": "body",
+          "description": "request payload",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string",
+                "example": "emekaofe@gmail.com"
+              }
+            }
+          }
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "200": {
+          "description": "Verification generated successfully",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "example": "success"
+              },
+              "message": {
+                "type": "string",
+                "example": "Verification Link generated successfully"
+              },
+              "data": {
+                "type": "string",
+                "example":"http://localhost:8008/api/v1/verification?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtZWthb2ZlMjJAZ21haWwuY29tIiwidXNlcklkIjYjQtOGZiZTdkOTgwMmVhIiwiaWF0IjoxNjI2MDIxMDE4LCJleHAiOjE2MjYwNTcwMTh9.OHnCYlx6h9wr_LnnXfZjtZOJ85g7P-39b_kJdvzqNq8&email=emekaofe22@gmail.com&confirmationCode=955c4d230a2b846d0bbe" }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request Error",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "example": "failed"
+              },
+              "message": {
+                "type": "string",
+                "example": "User with Email does not exist"
+              }
+            }
+          }
+        }
+      }
+    }
+  }

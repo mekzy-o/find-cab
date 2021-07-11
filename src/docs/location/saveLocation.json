@@ -1,0 +1,117 @@
+{
+    "post": {
+     "security": [
+            {
+              "Bearer": []
+            }
+          ],
+      "tags": [
+        "Location"
+      ],
+      "summary": "Save Driver location",
+      "description": "Save Driver's Location",
+      "parameters": [
+        {
+            "name": "Save Driver's Location",
+            "in": "body",
+            "description": "request payload",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "latitude": {
+                  "type": "string",
+                  "example": "23.40"
+                },
+                "longitude": {
+                  "type": "string",
+                  "example": "50.45"
+                }
+              }
+            }
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "201": {
+          "description": "Driver's location saved successfully",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "example": "successful"
+              },
+              "data": {
+                "type": "object",
+                "properties": {
+                  "id":{
+                      "type":"uuid",
+                      "example":"63773-eeie-737373773"
+                  },
+                  "name":{
+                    "type":"string",
+                    "example":"Emeka"
+                },
+                "email":{
+                    "type":"string",
+                    "example":"emeka22@gmail.com"
+                },
+                "phone_number":{
+                    "type":"string",
+                    "example":"08139303030"
+                },
+                "license_number":{
+                    "type":"string",
+                    "example":"2353535"
+                },
+                "car_number":{
+                    "type":"string",
+                    "example":"383838"
+                }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+            "description": "Bad Request Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "failed"
+                },
+                "message": {
+                  "type": "string",
+                  "example":"No token provided"
+                  }
+              }
+            }
+          },
+        "500": {
+          "description": "Validation Error",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "example": "failed"
+              },
+              "data": {
+                "type": "object",
+                "properties":{
+                    "errors":{
+                       "type":"array",
+                      "example": ["latitude is required"]
+                     }
+                  }
+                }
+            }
+          }
+        }
+      }
+    }
+  }

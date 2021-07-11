@@ -1,0 +1,128 @@
+{
+    "post": {
+      "tags": [
+        "Auth"
+      ],
+      "summary": "Create a user",
+      "description": "Create a new user",
+      "parameters": [
+        {
+          "name": "Register a new user",
+          "in": "body",
+          "description": "request payload",
+          "schema": {
+            "type": "object",
+            "properties": {
+             "name": {
+                "type": "string",
+                "example": "Emeka"
+              },
+              "email": {
+                "type": "string",
+                "example": "emekaofe@gmail.com"
+              },
+              "password": {
+                "type": "string",
+                "example": "pa55w0rd"
+              },
+              "phone_number": {
+                "type": "string",
+                "example": "0823636363"
+              },
+              "license_number": {
+                "type": "string",
+                "example": "525353"
+              },
+              "car_number": {
+                "type": "string",
+                "example": "525353"
+              }
+            }
+          }
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "201": {
+          "description": "Signup successful",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "example": "successful"
+              },
+              "message": {
+                "type": "string",
+                "example": "You have successfully registered with our platform. Please proceed to verify your email!"
+              },
+              "data": {
+                "type": "object",
+                "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Emeka"
+                      },
+                "email": {
+                  "type": "string",
+                  "example": "emekaofe12@gmail.com"
+                  },
+                "phone_number": {
+                  "type": "string",
+                  "example": "089292929"
+                  },
+                "license_number": {
+                  "type": "string",
+                  "example": "0892929"
+                  },
+                  "car_number": {
+                    "type": "string",
+                    "example": "08383929"
+                    }  
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad Request Error",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "example": "failed"
+              },
+              "message": {
+                "type": "string",
+                "example": "User With that email already exists"
+              }
+            }
+          }
+        },
+        "500": {
+            "description": "Validation Error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "failed"
+                },
+                "data": {
+                  "type": "object",
+                  "properties":{
+                      "errors":{
+                         "type":"array",
+                        "example": ["Email is required"]
+                       }
+                    }
+                  }
+              }
+            }
+          }
+      }
+    }
+  }

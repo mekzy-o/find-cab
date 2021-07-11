@@ -6,6 +6,8 @@ export const create = async(userid: any, body:{latitude: string, longitude:strin
     return location;
 }
 
+//Using harversine distance (SQL EQUIVALENT)
+//RADIUS is 4km
 export const getClosestLocation = async(latitude: string, longitude:string) => {
    const location = await db.sequelize.query(`
     SELECT Users.name, Users.car_number, Users.phone_number, latitude, longitude
@@ -21,7 +23,7 @@ export const getClosestLocation = async(latitude: string, longitude:string) => {
      FROM locations AS z
      JOIN ( 
            SELECT ${latitude}  AS latpoint,  ${longitude} AS longpoint,
-                   15.0 AS radius,      111.045 AS distance_unit
+                   4.0 AS radius,      111.045 AS distance_unit
        ) AS p ON 1=1
      WHERE z.latitude
         BETWEEN p.latpoint  - (p.radius / p.distance_unit)

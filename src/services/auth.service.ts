@@ -7,8 +7,7 @@ import { getAuthToken } from '../utils/auth';
 import { filterOutPassword } from '../utils/filterOutPassword';
 import { sendVerificationMail} from './email.service';
 import verificationService from './verification.service';
-import { userValidator } from '../validators';
-import { userService } from '.';
+import { authValidator } from '../validators';
 
 export interface UserReturnedProp {
   token: string,
@@ -26,7 +25,7 @@ export interface UserReturnedProp {
 }
 
 const registerUser = async (body: UserAttributes, url:string): Promise<Boolean> => {
-  await userValidator.validate(body, { strict: true });
+  await authValidator.signUpValidator.validate(body, { strict: true });
   const { email, password } = body;
   const foundUser = await User.getUserByEmail(email);
 
@@ -56,8 +55,8 @@ const registerUser = async (body: UserAttributes, url:string): Promise<Boolean> 
 
 
 export const loginUser = async (body: {email:string, password:string}) => {
+  await authValidator.signInValidator.validate(body, { strict: true });
   const { email, password } = body;
-  
   const foundUser = await User.getUserByEmail(email);
   if (!foundUser) {
     throw new ApplicationError({ message: 'User with this email does not exist' });

@@ -1,0 +1,52 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Find a Cab API",
+    "description": "Welcome to Find a cab api docs\n "
+  },
+  "servers": ["localhost:8008", "https://find-cab.herokuapp.com"],
+  "basePath": "/api/v1",
+  "schemes": ["http", "https"],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {},
+  "definitions": {
+    "Users": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "license_number": {
+          "type": "string"
+        },
+        "car_number": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

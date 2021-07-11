@@ -1,0 +1,76 @@
+{
+    "get": {
+      "tags": [
+        "Location"
+      ],
+      "summary": "Get cabs",
+      "description": "Get Cabs 4km away",
+      "parameters": [
+        {
+          "name": "latitude",
+          "in": "query",
+          "description": "latitude request payload",
+          "schema": {
+            "type": "string",
+             "example":"23.50"
+            }
+        },
+        {
+          "name": "longitude",
+          "in": "query",
+          "description": "longitude request payload",
+          "schema": {
+            "type": "string",
+             "example":"50.50"
+            }
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "200": {
+          "description": "Find cab successfully",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "example": "successful"
+              },
+              "data": {
+                "type": "object",
+                "properties": {
+                "available_cars": {
+                        "type": "Array",
+                        "example":"[{name:'Emeka', car_nuber:'000353', license_number:'363636'}, {...}]"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "Validation Error",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "example": "failed"
+              },
+              "data": {
+                "type": "object",
+                "properties":{
+                    "errors":{
+                       "type":"array",
+                      "example": ["latitude is required"]
+                     }
+                  }
+                }
+            }
+          }
+        }
+      }
+    }
+  }

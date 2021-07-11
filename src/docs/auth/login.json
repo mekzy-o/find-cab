@@ -1,0 +1,112 @@
+{
+    "post": {
+      "tags": [
+        "Auth"
+      ],
+      "summary": "Sign in user",
+      "description": "Login Existing User",
+      "parameters": [
+        {
+          "name": "Login Existing User",
+          "in": "body",
+          "description": "request payload",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string",
+                "example": "emekaofe@gmail.com"
+              },
+              "password": {
+                "type": "string",
+                "example": "pa55w0rd"
+              }
+            }
+          }
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "200": {
+          "description": "Login successful",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "number",
+                "example": 200
+              },
+              "data": {
+                "type": "object",
+                "properties": {
+                "token": {
+                        "type": "string",
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YjA0ZWRiMDZiZDc2MTQwMzgyOWNkMzkiLCJuYW1lIjoiQW1vcyBUb2JpIiwiZW1haWwiOiJ0b2JpQGdva2FkYS5uZyIsImlhdCI"
+                      },
+                  "id": {
+                    "type": "string",
+                    "example": "3425525a-bh152522626290-452626"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "emekaofe@gmail.com"
+                  },
+                  "phone_number": {
+                    "type": "string",
+                    "example": "089292929"
+                    },
+                  "license_number": {
+                    "type": "string",
+                    "example": "0892929"
+                    },
+                    "car_number": {
+                      "type": "string",
+                      "example": "08383929"
+                      }  
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request Error",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "example": "failed"
+              },
+              "message": {
+                "type": "string",
+                "example": "User with Email does not exist"
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "Validation Error",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "example": "failed"
+              },
+              "data": {
+                "type": "object",
+                "properties":{
+                    "errors":{
+                       "type":"array",
+                      "example": ["Email is required"]
+                     }
+                  }
+                }
+            }
+          }
+        }
+      }
+    }
+  }

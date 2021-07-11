@@ -2,8 +2,10 @@ import express, { Request, Response } from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
 import helmet from 'helmet';
+import swaggerUI from 'swagger-ui-express';
 import { ApplicationError, errorHandler } from './lib';
 import router from './routes';
+import docs from './docs';
 require('express-async-errors');
 
 const app = express()
@@ -26,6 +28,7 @@ app.use(express.json())
 // routes
 app.get('/', (req, res) => res.status(301).redirect('/api/v1'));
 app.use(router)
+app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(docs));
 app.all('*', (req: Request, res: Response) => {
   throw new ApplicationError({
     status: 404,

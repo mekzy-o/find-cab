@@ -29,7 +29,7 @@ export const generateVerificationLink = async (req: Request, res: Response, next
     const result = await verificationService.generateVerificationLink(req.body, url);
     return successResponse({
       res,
-      message:'Verification link generated successfully',
+      message:'Verification link generated successfully, Please copy link to your browser to verify your account',
       data: result,
       statusCode: 200,
     });
