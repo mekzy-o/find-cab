@@ -73,4 +73,9 @@
   //   " --module",
   //   "commonjs"
   // ]
+  "exclude": [
+    "./tests/",
+    "./node_modules/",
+    "./build/"
+  ],
 }

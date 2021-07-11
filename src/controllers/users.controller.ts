@@ -11,7 +11,7 @@ export const registerUser = async (req: Request, res: Response, next: NextFuncti
       res,
       message:'You have successfully registered with our platform. Please proceed to verify your email!',
       // data: {},
-      statusCode: 200,
+      statusCode: 201,
     });
   } catch (error) {
     next(error);

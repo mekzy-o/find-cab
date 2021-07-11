@@ -1,4 +1,6 @@
 # Find a Cab API
+[![Maintainability](https://api.codeclimate.com/v1/badges/177b32320654d2db3f10/maintainability)](https://codeclimate.com/github/mekzy-o/find-cab/maintainability)
+[![Code style: airbnb](https://img.shields.io/badge/code%20style-airbnb-blue.svg?style=flat-square)](https://github.com/airbnb/javascript)
 
 This repository houses code for [Find a Cab](https://find-cab.herokuapp.com/api/v1/docs)'s backend.
 
@@ -142,7 +144,7 @@ yarn run start:dev
 To run tests, run
 
 ```sh
-npm test
+yarn run test
 ```
 
 ## How to Get Help

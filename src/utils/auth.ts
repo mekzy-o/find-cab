@@ -19,7 +19,7 @@ const generateToken = (payload: any, expiryTime: string) => {
 };
 
 export const getAuthToken = (payload: any) => {
-  return generateToken(payload, '10h');
+  return generateToken(payload, process.env.EXPIRY_TIME as any);
 };
 
 export const verifyToken = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
