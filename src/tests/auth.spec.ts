@@ -23,6 +23,8 @@ after(async () => { await User.destroy({ where: {} }); });
           car_number:'3535355'
         });
 
+        console.log(response.body, 'response');
+
       response.status.should.equal(201);
       response.body.status.should.equal('success');
       response.body.should.have.property('data');
