@@ -5,8 +5,9 @@ on:
     branches:
       - main
 
+needs: main
+
 jobs:
-  needs: main
   build:
     runs-on: ubuntu-latest
     steps:
