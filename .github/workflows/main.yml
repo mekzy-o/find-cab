@@ -45,4 +45,6 @@ jobs:
       - name: Install dependencies
         run: yarn
       
+      - name: Run DB Migrations
+        run: yarn migrate
       - run: ENV_SILENT=true npm test
